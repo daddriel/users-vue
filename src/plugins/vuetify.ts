@@ -22,7 +22,7 @@ export default createVuetify({
       light: {
         colors: {
           background: colors.shades.white,
-          surface: colors.pink.lighten5,
+          surface: colors.grey.lighten5,
           primary: colors.shades.black,
           'primary-darken-1': colors.shades.black,
           secondary: colors.lightBlue.darken2,

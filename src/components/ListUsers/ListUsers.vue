@@ -1,0 +1,71 @@
+<template>
+  <v-container>
+    <v-row>
+      <v-col cols="12">
+        <v-card>
+          <v-card-title class="d-flex justify-space-between align-center">
+            <div class="text-h4">Users List</div>
+
+            <v-btn color="primary" @click="$router.push('/users/new')">
+              <v-icon>mdi-plus</v-icon>
+              <span class="ms-2">Add User</span>
+            </v-btn>
+          </v-card-title>
+          <v-divider class="mb-6"></v-divider>
+          <v-data-table :headers="headers" :items="users">
+            <template v-slot:item.actions="{ item }">
+              <v-icon size="small" class="me-2" @click="$router.push(`/users/${item.id}`)">
+                mdi-eye
+              </v-icon>
+              <v-icon size="small" class="me-2" @click="editItem(item)">
+                mdi-pencil
+              </v-icon>
+              <v-icon size="small" @click="deleteById()">
+                mdi-delete
+                <v-tooltip activator="parent" location="start"
+                  >Tooltip</v-tooltip
+                >
+              </v-icon>
+            </template>
+          </v-data-table>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+<script lang="ts">
+import UserService from "@/services/UserService";
+import { defineComponent, onMounted } from "vue";
+
+export default defineComponent({
+  name: "ListUsers",
+  setup() {
+
+    const service = new UserService();
+    const users = service.getUsers();
+    const headers = [
+      {
+        title: "Id",
+        align: "start",
+        sortable: false,
+        key: "id",
+      },
+      { title: "User Name", key: "userName" },
+      { title: "Email", key: "email" },
+      { title: "First Name", key: "firstName" },
+      { title: "LastName", key: "lastName" },
+      { title: "Age", key: "age" },
+      { title: "Actions", key: "actions", sortable: false },
+    ];
+
+    onMounted(async () => {
+      await service.fetchAll();
+    });
+
+    return {
+      users,
+      headers,
+    };
+  },
+});
+</script>
