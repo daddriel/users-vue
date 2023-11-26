@@ -1,9 +1,10 @@
 <template>
-  <div>
-    USERS
-  </div>
+  <ListUsersVue/>
+
 </template>
-<script>
+<script lang="ts" setup>
+import ListUsersVue from "@/components/ListUsers/ListUsers.vue";
+
 </script>
 <style>
   

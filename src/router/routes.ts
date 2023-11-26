@@ -16,6 +16,14 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: 'Default',
     }
+  },
+  {
+    path: '/users/new',
+    name: 'NewUser',
+    component: () => import('../views/NewUser.vue'),
+    meta: {
+      layout: 'Default',
+    }
   }
  
 ];
