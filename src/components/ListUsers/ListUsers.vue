@@ -17,10 +17,10 @@
               <v-icon size="small" class="me-2" @click="$router.push(`/users/${item.id}`)">
                 mdi-eye
               </v-icon>
-              <v-icon size="small" class="me-2" @click="editItem(item)">
+              <v-icon size="small" class="me-2" @click="$router.push(`/users/${item.id}/edit`)">
                 mdi-pencil
               </v-icon>
-              <v-icon size="small" @click="deleteById()">
+              <v-icon size="small" >
                 mdi-delete
                 <v-tooltip activator="parent" location="start"
                   >Tooltip</v-tooltip

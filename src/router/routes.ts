@@ -26,6 +26,14 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
+    path: '/users/:id/edit',
+    name: 'EditUser',
+    component: () => import('../components/EditUser/EditUser.vue'),
+    meta: {
+      layout: 'Default',
+    }
+  },
+  {
     path: '/users/new',
     name: 'NewUser',
     component: () => import('../views/NewUser.vue'),
