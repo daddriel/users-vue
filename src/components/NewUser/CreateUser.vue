@@ -10,53 +10,53 @@
             <v-form v-model="valid" ref="form">
               <v-text-field
                 v-model="user.userName"
-                label="Nombre de usuario"
-                :rules="[(v) => !!v || 'El nombre de usuario es obligatorio']"
+                label="Username"
+                :rules="[(v) => !!v || 'Username is required']"
                 required
                 variant="outlined"
               ></v-text-field>
               <v-text-field
                 v-model="user.password"
-                label="Contraseña"
-                :rules="[(v) => !!v || 'La contraseña es obligatoria']"
+                label="Password"
+                :rules="[(v) => !!v || 'Password is required']"
                 required
                 variant="outlined"
                 type="password"
               ></v-text-field>
               <v-text-field
                 v-model="user.email"
-                label="Correo electrónico"
-                :rules="[(v) => !!v || 'El correo electrónico es obligatorio']"
+                label="Email"
+                :rules="[(v) => !!v || 'Email is required']"
                 required
                 variant="outlined"
                 type="email"
               ></v-text-field>
               <v-text-field
                 v-model="user.userDetailDTO.firstName"
-                label="Nombre"
-                :rules="[(v) => !!v || 'El nombre es obligatorio']"
+                label="Name"
+                :rules="[(v) => !!v || 'Name is required']"
                 required
                 variant="outlined"
               ></v-text-field>
               <v-text-field
                 v-model="user.userDetailDTO.lastName"
-                label="Apellido"
-                :rules="[(v) => !!v || 'El apellido es obligatorio']"
+                label="Last Name"
+                :rules="[(v) => !!v || 'Last Name is required']"
                 required
                 variant="outlined"
               ></v-text-field>
               <v-text-field
                 v-model="user.userDetailDTO.age"
-                label="Edad"
-                :rules="[(v) => !!v || 'La edad es obligatoria']"
+                label="Age"
+                :rules="[(v) => !!v || 'Age is required']"
                 required
                 variant="outlined"
                 type="number"
               ></v-text-field>
               <v-text-field
                 v-model="user.userDetailDTO.birthDay"
-                label="Fecha de nacimiento"
-                :rules="[(v) => !!v || 'La fecha de nacimiento es obligatoria']"
+                label="Birth Day"
+                :rules="[(v) => !!v || 'Birth Day is required']"
                 required
                 variant="outlined"
                 type="date"
@@ -68,7 +68,7 @@
                 class="mr-4"
                 @click="submit"
               >
-                Enviar
+                Create a new user
               </v-btn>
             </v-form>
           </v-card-text>
@@ -80,24 +80,31 @@
 <style></style>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, toRaw } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 
 const user = ref({
-  userName: "daniel",
-  password: "123",
-  email: "daniel@mail.com",
+  userName: "",
+  password: "",
+  email: "",
   userDetailDTO: {
-    firstName: "Daniel",
-    lastName: "Perez",
-    age: 24,
-    birthDay: "1999-12-01",
+    firstName: "",
+    lastName: "",
+    age: "",
+    birthDay: "",
   },
 });
 
+const raw = toRaw(user.value); 
 const valid = ref(true);
 
 const form = ref<HTMLFormElement | null>(null);
+
+const gotoUsers = () => {
+  const router = useRouter();
+  router.push("/users");
+};
 
 const submit = () => {
   if (form.value?.validate()) {
@@ -108,13 +115,18 @@ const submit = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(user) 
+        body: JSON.stringify(raw) 
       })
+
+      console.log(JSON.stringify(raw), 11111)
       const json =  response
       console.log(json, 323423)
+      gotoUsers();
     } catch (error) {
       console.log(error)
     }
+
+    
   }
     console.log(user);
     console.log("Formulario enviado");

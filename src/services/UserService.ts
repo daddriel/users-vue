@@ -20,10 +20,6 @@ class UserService {
   getUsers ():Ref<Array<User>>{
     return this.users
   }
-  postUser (user:User):void{
-    this.user.value = user
-  }
-
 
   async fetchAll():Promise<void> {
     try {
@@ -59,24 +55,6 @@ class UserService {
       console.log(error);
       
     }
-  }
-
-  async createUser(user: User): Promise<void> {
-    try {
-      const url = 'http://localhost:8081/v1/users'
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(user) // enviar el usuario nuevo como JSON al servidor
-      })
-      const json = await response.json()
-      this.user.value = await json // asignar el usuario creado con la respuesta del servidor
-    } catch (error) {
-      console.log(error)
-    }
-
   }
 
 }

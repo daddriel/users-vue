@@ -38,7 +38,7 @@ export default createVuetify({
           something: '#000000',
           background: colors.grey.darken4,
           surface: colors.blueGrey.darken4,
-          primary: colors.pink.accent3,
+          primary: colors.blue.darken4,
           'primary-darken-1': '#3700B3',
           secondary: '#03DAC6',
           'secondary-darken-1': '#018786',
