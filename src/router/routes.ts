@@ -18,6 +18,14 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
+    path: '/users/:id',
+    name: 'User',
+    component: () => import('../components/UserById/UserbyId.vue'),
+    meta: {
+      layout: 'Default',
+    }
+  },
+  {
     path: '/users/new',
     name: 'NewUser',
     component: () => import('../views/NewUser.vue'),
