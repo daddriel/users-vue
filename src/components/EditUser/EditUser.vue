@@ -54,7 +54,6 @@
                 variant="outlined"
                 type="number"
               ></v-text-field>
-              <div> {{ user }}</div>
               <v-btn
                 :disabled="!valid"
                 color="primary"
@@ -87,10 +86,10 @@ const user = service.getUser();
 const { id } = useRoute().params;
 const form = ref<HTMLFormElement | null>(null);
 const isLoading = ref(true);
+const router = useRouter();
+function  gotoUsers(){
 
-const gotoUsers = () => {
-  const router = useRouter();
-  router.push("/users");
+  router.push(`/users/${id}`);
 };
 
 const raw = toRaw(user.value);
@@ -116,13 +115,15 @@ const submit = () => {
           'Access-Control-Allow-Origin' : '*',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(user.value) 
-      })
+        body: JSON.stringify(user.value)
 
+        
+      })
+      
       console.log(user, "raw")
       const json =  response
-      console.log(user, "user normal")
       gotoUsers();
+      
     } catch (error) {
       console.log(error)
     }
