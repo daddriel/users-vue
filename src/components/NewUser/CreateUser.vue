@@ -104,7 +104,7 @@ const form = ref<HTMLFormElement | null>(null);
 const router = useRouter();
 function  gotoUsers(){
 
-  router.push(`/users`);
+  router.push(`/`);
 };
 const submit = () => {
   if (form.value?.validate()) {
