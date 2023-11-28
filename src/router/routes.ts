@@ -20,7 +20,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/users/:id',
     name: 'User',
-    component: () => import('../components/UserById/UserbyId.vue'),
+    component: () => import('../views/User.vue'),
     meta: {
       layout: 'Default',
     }

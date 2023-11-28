@@ -101,11 +101,11 @@ const valid = ref(true);
 
 const form = ref<HTMLFormElement | null>(null);
 
-const gotoUsers = () => {
-  const router = useRouter();
-  router.push("/users");
-};
+const router = useRouter();
+function  gotoUsers(){
 
+  router.push(`/users`);
+};
 const submit = () => {
   if (form.value?.validate()) {
     try {
