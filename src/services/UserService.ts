@@ -57,6 +57,21 @@ class UserService {
     }
   }
 
+  async deleteUser(id: any):Promise<void> {
+    try {
+      const url = `http://localhost:8081/v1/users/${id}`
+      const response = await fetch(url,{
+        method: 'DELETE',
+      })
+      const json =  await response.json()
+      console.log(json);
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
 }
 
 export default UserService
