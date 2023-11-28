@@ -14,17 +14,26 @@
           <v-divider class="mb-6"></v-divider>
           <v-data-table :headers="headers" :items="users">
             <template v-slot:item.actions="{ item }">
-              <v-icon size="small" class="me-2" @click="$router.push(`/users/${item.id}`)">
+              <v-icon
+                size="small"
+                class="me-2"
+                @click="$router.push(`/users/${item.id}`)"
+              >
                 mdi-eye
               </v-icon>
-              <v-icon size="small" class="me-2" @click="$router.push(`/users/${item.id}/edit`)">
+              <v-icon
+                size="small"
+                class="me-2"
+                @click="$router.push(`/users/${item.id}/edit`)"
+              >
                 mdi-pencil
               </v-icon>
-              <v-icon size="small" >
+              <v-icon 
+              size="small" 
+              @click.prevent="deleteItem(item)"
+
+              >
                 mdi-delete
-                <v-tooltip activator="parent" location="start"
-                  >Tooltip</v-tooltip
-                >
               </v-icon>
             </template>
           </v-data-table>
@@ -40,7 +49,6 @@ import { defineComponent, onMounted } from "vue";
 export default defineComponent({
   name: "ListUsers",
   setup() {
-
     const service = new UserService();
     const users = service.getUsers();
     const headers = [
@@ -67,5 +75,31 @@ export default defineComponent({
       headers,
     };
   },
-});
+  methods: {
+    async deleteItem(item: User) {
+      console.log(item.id, "entraaaa");
+      try {
+        const url = `http://localhost:8081/v1/users/${item.id}`;
+        const response = await fetch(url, {
+          method: "DELETE",
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        });
+        const json = await response;
+        // const service = new UserService();
+        // await service.fetchAll();
+        this.deleteItemFront(item);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    deleteItemFront(item: any) {
+    this.users.splice(this.users.indexOf(item), 1);
+   },
+},
+
+  },
+);
 </script>
